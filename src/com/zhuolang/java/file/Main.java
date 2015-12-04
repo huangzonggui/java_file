@@ -10,9 +10,6 @@ import java.util.List;
 public class Main {
 	
 
-	//test test test
-
-
 	private boolean debug = true;
 	
 	private String exec; //转化为String
@@ -31,8 +28,8 @@ public class Main {
 	}
 	
 	public void start() throws IOException{
-		for (;;) {
-			
+			for (;;) 
+			{
 			param.clear();
 			
 			System.out.print("["+name +"@"+path+" ~]$ ");
@@ -59,6 +56,10 @@ public class Main {
 				cd();
 				break;
 
+			case "ls":
+				ls();
+				break;
+
 			default:
 				System.out.println("你说什么啊，sb");
 				break;
@@ -71,6 +72,7 @@ public class Main {
 	private void cd(){
 		if(param.isEmpty()){
 			System.out.println("有病是不是，会不会用呀，cd 后面需要跟参数你不知道吗？");
+			
 		}
 		switch (param.get(0)) {
 		case ".":
@@ -87,7 +89,15 @@ public class Main {
 		System.out.println("sb 拜拜");
 		System.exit(0);
 	}
-
+	private void ls() throws IOException{
+		path = new File("").getAbsolutePath();//获取当前目录
+		File f = new File(path); 
+		String[] names = f.list();
+		for(String name : names)//for 的高级循环
+		{
+			System.out.println(name);
+		}
+	}
 	public static void main(String[] args) throws IOException {
 		new Main().start();
 	}
