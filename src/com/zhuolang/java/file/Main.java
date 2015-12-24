@@ -1,4 +1,4 @@
-//package com.zhuolang.java.file;
+package com.zhuolang.java.file;
 
 import java.io.*;
 import java.util.*;
@@ -89,6 +89,20 @@ public class Main {
 			path = f.getParent();
 			break;
 		default:
+			File root = new File( path );   
+			File[] files = root.listFiles();      
+			String s = param.get(0).toString();//将输入的参数提取出来
+			for ( File file : files )     
+			{          
+				if ( file.isDirectory() )        
+				{     
+					if(s.equals(file.getName())){//判断两个字符串是否相等用equals（输入的名称与所有文件夹的名称作一次判断）
+						path = file.getAbsolutePath();//获取这个文件夹的绝对路径
+					}else{
+						System.out.println("没有"+s+"这个文件夹");
+					}
+				}
+			}   
 			break;
 		}
 	}
@@ -126,22 +140,25 @@ public class Main {
 			switch (param.get(0))
 			{
 			
-			case "copy.txt":
-					bufr = new BufferedReader(new FileReader("copy.txt"));
-					bufw = new BufferedWriter(new FileWriter("复制出来的文件.txt"));
-
-					String line = null;
-
-					while((line=bufr.readLine())!=null)
-					{
-						bufw.write(line);
-						bufw.newLine();
-						bufw.flush();
-
-					}
-				break;	
+			case ".":
+				System.out.println("请输入要复制文件的正确的路径");
+						
 			default :
-				System.out.println("你要复制的文件不存在！请查正再复制！");
+
+//				bufr = new BufferedReader(new FileReader("copy.txt"));
+//					bufw = new BufferedWriter(new FileWriter("复制出来的文件.txt"));
+//
+//					String line = null;
+//
+//					while((line=bufr.readLine())!=null)
+//					{
+//						bufw.write(line);
+//						bufw.newLine();
+//						bufw.flush();
+//
+//					}
+//				break;
+//				System.out.println("你要复制的文件不存在！请查正再复制！");
 				break;
 			}
 
